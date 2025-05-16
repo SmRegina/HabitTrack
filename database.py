@@ -11,9 +11,9 @@ def init_db():
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS Users (
             user_id INTEGER PRIMARY KEY,
-            user_name TEXT,
-            first_name TEXT,
-            created_at TEXT
+            user_name,
+            first_name,
+            created_at
         )
     """)
 
