@@ -18,8 +18,11 @@ async def start(update, context):
                          (user_id, username, firstname, datetime.now().strftime('%Y-%m-%d %H:%M:%S')))
             if cursor.rowcount > 0:
                 conn.commit()
-                await update.message.reply_text(f"Привет, {firstname}!\nЯ бот для формирования привычек...")
-                await update.message.reply_text("Команды:\n/start - начать\n/add_habit - добавление привычки...")
+                await update.message.reply_text(f"Привет, {firstname}!\nЯ бот для формирования привычек.\n"
+                                                "Напоминаю о твоих целях три раза в день: утром, днем и вечером. Ты отмечаешь, сделал задачу или нет. Если пропустишь 7 раз подряд — я уберу привычку из активных, чтобы тебя не перегружать."
+                                                "А еще я каждую неделю присылаю тебе статистику ツ")
+                await update.message.reply_text("Команды:\n"
+                                                "/start - начать\n/add_habit - добавление привычки\n/delete_habit - удаление привычки\n/list_habits - показывает список привычек")
             else:
                 await update.message.reply_text("Не удалось добавить пользователя. ⍨")
         else:
@@ -29,7 +32,7 @@ async def start(update, context):
         await update.message.reply_text("Ошибка подключения")
 
 async def help_command(update, context):
-    await update.message.reply_text("/start - начать\n/add_habit - добавление привычки...")
+    await update.message.reply_text("/start - начать\n/add_habit - добавление привычки\n/delete_habit - удаление привычки\n/list_habits - показывает список привычек")
 
 def setup_start_handlers(application):
     application.add_handler(CommandHandler("start", start))
